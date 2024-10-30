@@ -1,0 +1,22 @@
+body {
+    padding-top: 56px; /* Espacio para la navbar fija */
+}
+.sidebar {
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding-top: 20px;
+}
+.btn-red {
+    background-color: #dc3545;
+    color: white;
+}
+.btn-red:hover {
+    background-color: #c82333;
+}
+.btn-grey {
+    background-color: #6c757d;
+    color: white;
+}
+.btn-grey:hover {
+    background-color: #5a6268;
+}
