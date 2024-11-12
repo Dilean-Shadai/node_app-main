@@ -1,19 +1,25 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const validarToken = require('../utils/token');
 const router = Router();
 
 router.get("/", (req, res) => {
-    res.redirect("/inicio");
+    res.render('login', { mensaje: "Iniciar sesión", mostrarHeader: false }); // Header oculto
 });
 
-router.get("/inicio", validarToken, (req, res) => {
-    res.render('inicio',{mensaje:"Inicio"});
+router.get("/panel", (req, res) => {
+    res.render('panel', { mensaje: "Menu principal", mostrarHeader: false }); // Header oculto
 });
 
-router.get("/caracteristicas", (req, res) => res.render('inicio',{mensaje:"Características"}));
+router.get("/panel/agregar-cita", (req, res) => {
+    res.render('agregar-cita', { mensaje: "Agregar nueva cita", mostrarHeader: true }); // Header visible
+});
 
-router.get("/precios", (req, res) => res.render('inicio',{mensaje:"Precios"}));
+router.get("/panel/pacientes", (req, res) => {
+    res.render('pacientes', { mensaje: "Ver Lista Pacientes", mostrarHeader: true }); // Header visible
+});
 
-router.get("/contacto", (req, res) => res.render('inicio',{mensaje:"Contacto"}));
+router.get("/panel/usuarios", (req, res) => {
+    res.render('usuarios', { mensaje: "Agregar usuarios", mostrarHeader: true }); // Header visible
+});
 
 module.exports = router;

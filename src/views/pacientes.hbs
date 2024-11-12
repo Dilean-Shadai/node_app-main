@@ -1,0 +1,27 @@
+<!-- REVISAR CUANDO tengamos la base de datos conectada xd-->
+<div class="container">
+    <h2>Pacientes</h2>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Fecha de Registro</th>
+            <th>Editar paciente</th>
+        </tr>
+        {{#each pacientes}} <!-- itera sobre los pacientes pasados desde la ruta -->
+        <tr>
+            <td>{{nombre}}</td> <!-- -->
+            <td>{{apellido}}</td> 
+            <td>{{telefono}}</td> 
+            <td>{{email}}</td> 
+            <td>{{fecha_registro}}</td> 
+            <td>
+                <button class="btn">Editar</button> 
+                <button class="btn">Borrar</button>
+            </td>
+        </tr>
+        {{/each}} <!-- Cierra el bucle x cada paciente -->
+    </table>
+</div>

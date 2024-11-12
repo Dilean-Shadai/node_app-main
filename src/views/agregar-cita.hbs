@@ -1,0 +1,22 @@
+<div class="container">
+        <h2>Agregar Cita</h2>
+        <form class="form" action="/agregar_cita" method="post">
+            <label for="id_paciente">Paciente</label>
+            <select id="id_paciente" name="id_paciente">
+                <!-- Opciones de pacientes que se obtendrán de la base de datos -->
+                <option value="1">Juan Pérez</option>
+                <option value="2">Ana López</option>
+            </select>
+
+            <label for="fecha_cita">Fecha de la Cita</label>
+            <input type="date" id="fecha_cita" name="fecha_cita" required>
+
+            <label for="hora_cita">Hora de la Cita</label>
+            <input type="time" id="hora_cita" name="hora_cita" required>
+
+            <label for="motivo">Motivo</label>
+            <textarea id="motivo" name="motivo"></textarea>
+
+            <button type="submit" class="btn">Guardar</button>
+        </form>
+    </div>

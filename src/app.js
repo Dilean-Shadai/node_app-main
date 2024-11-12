@@ -1,3 +1,4 @@
+// configiramos el servidor express, las rutas, middlewares y configuraciones globales de la applicación
 // Elementos comunes que necesita la aplicación para utilizar funciones de las librerias
 const express = require('express');
 const morgan = require('morgan');
@@ -22,7 +23,7 @@ app.engine('hbs', engine({
 //Configuraciones de la aplicación
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); // para que sea publico lo que hay en public
 app.use(cookieParser());
 app.use(morgan('dev'));
 
@@ -30,7 +31,7 @@ app.use(morgan('dev'));
 //app.use(validarToken);
 
 //Rutas a utilizar
-app.use(require("./routes/general.js"));
+app.use(require("./routes/general.js")); // debemos modificar aquí creo....
 app.use(require("./routes/login.js"));
 app.use(require("./routes/admin.js"));
 
