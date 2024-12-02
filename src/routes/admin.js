@@ -1,6 +1,28 @@
 
 const { Router } = require('express');
 const router = Router();
+// Ruta para obtener la lista de usuarios en /panel/usuarios
+router.get("/panel/usuarios", async (req, res) => {
+  try {
+    const respuestaServidor = await fetch('http://localhost:3000/api/usuarios', {  // Solicitar la lista de usuarios desde la API
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'  // Ajusta los headers según sea necesario
+      }
+    });
+
+    if (!respuestaServidor.ok) throw new Error('Error al acceder a la ruta protegida');  // Verificar si la respuesta es exitosa
+
+    const data = await respuestaServidor.json();  // Parsear la respuesta JSON con la lista de usuarios
+    console.log('Datos recibidos:', data);
+
+    res.render('usuarios', { usuarios: data, usuario: res.locals.usuario, mostrarHeader: true });  // Renderizar la vista usuarios.hbs
+  } catch (error) {
+    console.error('Error:', error);
+    res.render('usuarios', { mensaje: error.message, usuario: res.locals.usuario, mostrarHeader: true });  // Mostrar mensaje de error si falla la obtención de usuarios
+  }
+});
+
 
 // Ruta para obtener la lista de usuarios
 router.get("/usuarios", async (req, res) => {
