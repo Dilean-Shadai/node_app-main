@@ -1,49 +1,47 @@
-// Agregar notas
+
 const { Router } = require('express');
-const validarToken = require('../utils/token');
 const router = Router();
 
-router.get("/ver", validarToken, async (req, res) => {
-    try {
-        const token = req.cookies.token; // Obtener el token de las cookies
-        const respuestaServidor = await fetch('http://localhost:3000/api/list', { 
-            method: 'get', 
-            headers: { 
-                'Authorization': `Bearer ${token}`, 
-                'Content-Type': 'application/json' 
-            } 
-        }); // Realizar una solicitud GET a la API con el token de autenticación
-        
-        if (!respuestaServidor.ok) throw new Error('Error al acceder a la ruta protegida'); // Verificar si la respuesta es exitosa
+// Ruta para obtener la lista de usuarios
+router.get("/usuarios", async (req, res) => {
+  try {
+    const respuestaServidor = await fetch('http://localhost:3000/api/usuarios', {  // Solicitar la lista de usuarios desde la API
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'  // Eliminar el token de los headers
+      }
+    });
 
-        const data = await respuestaServidor.json(); // Parsear la respuesta JSON
-        console.log('Datos recibidos:', data);
-        
-        res.render('lista', { lista: data, usuario: res.locals.usuario, mostrarHeader: true }); // Renderizar la vista con los datos obtenidos y el header visible
-    } catch (error) {
-        console.error('Error:', error);
-        res.render('lista', { mensaje: error.message, usuario: res.locals.usuario, mostrarHeader: true }); // Mostrar el mensaje de error
-    }
+    if (!respuestaServidor.ok) throw new Error('Error al acceder a la ruta protegida');  // Verificar si la respuesta es exitosa
+
+    const data = await respuestaServidor.json();  // Parsear la respuesta JSON con la lista de usuarios
+    console.log('Datos recibidos:', data);
+
+    res.render('usuarios', { usuarios: data, usuario: res.locals.usuario, mostrarHeader: true });  // Pasar los usuarios a la vista usuarios.hbs
+  } catch (error) {
+    console.error('Error:', error);
+    res.render('usuarios', { mensaje: error.message, usuario: res.locals.usuario, mostrarHeader: true });  // Mostrar mensaje de error si falla la obtención de usuarios
+  }
 });
 
-router.get("/registrar", validarToken, (req, res) => {
+// Ruta para mostrar la página de registro
+router.get("/registrar", (req, res) => {
     res.render('registro', { mostrarHeader: true }); // Renderizar la vista de registro con el header visible
 });
 
-router.post("/registrar", validarToken, async (req, res) => {
+// Ruta para registrar un nuevo usuario
+router.post("/registrar", async (req, res) => {
     const { nombre, password } = req.body; // Obtener el nombre y password del cuerpo de la solicitud
     
     try {
-        const token = req.cookies.token; // Obtener el token de las cookies
         const respuestaServidor = await fetch('http://localhost:3000/api/add', { 
             method: 'POST', 
             headers: { 
-                'Authorization': `Bearer ${token}`, 
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'  // Eliminar el token de los headers
             }, 
             body: JSON.stringify({ nombre, password }) 
-        }); // Enviar la solicitud POST con los datos y token de autenticación
-        
+        }); // Enviar la solicitud POST con los datos
+
         if (!respuestaServidor.ok) throw new Error('Error al acceder a la ruta protegida'); // Verificar si la respuesta es exitosa
 
         const data = await respuestaServidor.json(); // Parsear la respuesta JSON
