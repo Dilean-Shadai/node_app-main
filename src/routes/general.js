@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/panel", (req, res) => {
-    res.render('panel', { mensaje: "Menu principal", mostrarHeader: false }); // Header oculto
+    res.render('panel', { mensaje: "Menu principal", mostrarHeader: false }); 
 });
 
 router.get("/panel/agregar-cita", (req, res) => {
@@ -15,11 +15,11 @@ router.get("/panel/agregar-cita", (req, res) => {
 });
 
 router.get("/panel/pacientes", (req, res) => {
-    res.render('pacientes', { mensaje: "Ver Lista Pacientes", mostrarHeader: true }); // Header visible
+    res.render('pacientes', { mensaje: "Ver Lista Pacientes", mostrarHeader: true }); 
 });
 
 router.get("/panel/usuarios", (req, res) => {
-    res.render('usuarios', { mensaje: "Agregar usuarios", mostrarHeader: true }); // Header visible
+    res.render('usuarios', { mensaje: "Agregar usuarios", mostrarHeader: true }); 
 });
 
 module.exports = router;
