@@ -38,8 +38,8 @@ router.post("/login", async (req, res) => {
 });
 
 // Ruta para cerrar sesión
-router.get('/logout', (req, res) => {
-  res.redirect('/');
-});
+//router.get('/logout', (req, res) => {
+  //res.redirect('/');
+// });
 
 module.exports = router;
